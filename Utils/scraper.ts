@@ -1,6 +1,6 @@
 import axios from 'axios';
 import cheerio from 'cheerio';
-import Celebrity from './Models/Celebrity';
+import Celebrity from '../src/Models/Celebrity';
 import puppeteer from 'puppeteer';
 
 class Scraper {
