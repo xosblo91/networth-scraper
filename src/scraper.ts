@@ -13,8 +13,7 @@ class Scraper {
   }
 
   async getCelebrity(): Promise<Celebrity> {
-    const celebrity = await this.retry(5, 100, false);
-    return celebrity;
+    return await this.retry(5, 100, false);
   }
 
   private async retry(retriesLeft: number, interval: number, exponential: boolean): Promise<Celebrity> {
@@ -27,22 +26,17 @@ class Scraper {
       if (retriesLeft) {
         await new Promise((r) => setTimeout(r, interval));
         return this.retry(retriesLeft - 1, exponential ? interval * 2 : interval, exponential);
-      } else throw new Error(`Max retries reached for function ${this.getCelebrity.name}`);
+      } else {
+        throw new Error(`Max retries reached for function ${this.getCelebrity.name}`);
+      }
     }
   }
 
   private async scrapeNetWorth(actor: string): Promise<Celebrity> {
-    let celebrity: Celebrity = {
-      name: '',
-      netWorthInPlainText: '',
-      netWorthInNumbers: 0,
-      imageUrl: '',
-    };
-
     const result = await axios.get(this.netWorthUrl + actor.replace(/\s/g, '-') + '-net-worth');
     const $ = cheerio.load(result.data);
 
-    celebrity = {
+    const celebrity = {
       name: $('.celeb_stats_table_header').text(),
       netWorthInPlainText: $('.value').first().text(),
       netWorthInNumbers: this.parseNetWorthString($('.value').first().text().split(' ')),
@@ -53,8 +47,6 @@ class Scraper {
   }
 
   private async scrapeRandomCelebrityName(): Promise<string> {
-    let celebrityName = '';
-
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(this.celebrityUrl);
@@ -66,7 +58,7 @@ class Scraper {
     });
 
     const $ = cheerio.load(body.outerHTML);
-    celebrityName = $('.rand_medium').text();
+    const celebrityName = $('.rand_medium').text();
 
     return celebrityName;
   }
