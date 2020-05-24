@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Scraper from '../../Utils/scraper';
+import Scraper from '../Utils/scraper';
 import Guess from '../Models/Guess';
 
 async function getGuess(req: Request, res: Response): Promise<Response> {
