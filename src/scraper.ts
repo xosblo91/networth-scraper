@@ -46,7 +46,7 @@ class Scraper {
       name: $('.celeb_stats_table_header').text(),
       netWorthInPlainText: $('.value').first().text(),
       netWorthInNumbers: this.parseNetWorthString($('.value').first().text().split(' ')),
-      imageUrl: '',
+      imageUrl: $('.image.ggnoads.lozad').attr('data-src'),
     };
 
     return celebrity;

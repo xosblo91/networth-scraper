@@ -3,5 +3,5 @@ export default interface Celebrity {
   netWorthInPlainText: string;
   netWorthInNumbers: number;
   winner?: boolean;
-  imageUrl: string;
+  imageUrl?: string;
 }
