@@ -4,7 +4,8 @@
   "description": "Sup ya'll it's me, it's ya boy asmongold",
   "main": "index.js",
   "scripts": {
-    "serve": "nodemon -x ts-node src/index.ts"
+    "serve": "nodemon -x ts-node src/index.ts",
+    "stop-win": "Taskkill /IM node.exe /F"
   },
   "author": "Oskar Blom",
   "license": "ISC",

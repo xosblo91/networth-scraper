@@ -13,7 +13,19 @@ class Scraper {
   }
 
   async getCelebrity(): Promise<Celebrity> {
-    return await this.retry(5, 100, false);
+    try {
+      return await this.retry(5, 100, false);
+    } catch (error) {
+      const celebrity = {
+        name: '',
+        netWorthInPlainText: '',
+        netWorthInNumbers: 0,
+        imageUrl: '',
+      };
+      console.log(error);
+
+      return celebrity;
+    }
   }
 
   private async retry(retriesLeft: number, interval: number, exponential: boolean): Promise<Celebrity> {
@@ -56,6 +68,8 @@ class Scraper {
         outerHTML: document.body.outerHTML,
       };
     });
+
+    await browser.close();
 
     const $ = cheerio.load(body.outerHTML);
     const celebrityName = $('.rand_medium').text();
