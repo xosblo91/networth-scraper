@@ -11,21 +11,10 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
-    "lib": [
-      "esnext",
-      "scripthost",
-      "DOM"
-    ]
+    "lib": ["esnext", "scripthost", "DOM"]
   },
-  "include": [
-    "src/**/*.ts",
-    "tests/**/*.ts",
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src/**/*.ts", "tests/**/*.ts"],
+  "exclude": ["node_modules"]
 }
